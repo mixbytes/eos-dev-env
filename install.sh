@@ -28,4 +28,11 @@ else
 
     echo 'Building EOS docker...'
     docker build -t local/eos $EOS_ENV_DIR/eos-compile-service/docker
+
+    echo 'Checking and adding "eostest" docker network...'
+	if docker network ls | fgrep -q "eostest"; then 
+		echo '"eostest" network already exists'
+	else
+		docker network create eostest;
+	fi
 fi
